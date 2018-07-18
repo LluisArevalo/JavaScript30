@@ -21,6 +21,21 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      background: var(--base);
+      padding: var(--spacing);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -45,6 +60,15 @@
   </style>
 
   <script>
+    const image = document.querySelector('img')
+
+    const updateRange = event => {
+      const extension = event.target.value.indexOf('#') >= 0 ? '' : 'px'
+      image.style.setProperty(`--${event.target.id}`, `${event.target.value}${extension}`)
+    };
+
+    const inputRange = document.querySelectorAll('input')
+    inputRange.forEach(input => input.addEventListener('input', updateRange))
   </script>
 
 </body>
