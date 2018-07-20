@@ -14,9 +14,25 @@
       <li>or a state</li>
     </ul>
   </form>
-<script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  <script>
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    let cities = [];
+    fetch(endpoint).then(response => response.json()).then(data => cities = data);
 
-</script>
+    const citiesResults = document.querySelector('.suggestions');
+    function filterSearch() {
+      citiesResults.innerHTML = '';
+      const value = this.value;
+      cities
+        .filter(city => city.city.toLowerCase().indexOf(value.toLowerCase()) >= 0 || city.state.toLowerCase().indexOf(value.toLowerCase()) >= 0)
+        .map(city => {
+          const liItem = document.createElement('li');
+          liItem.innerHTML = `${city.city}, ${city.state}`;
+          citiesResults.appendChild(liItem);
+        });
+    }
+
+    document.querySelector('.search').addEventListener('keyup', filterSearch);
+  </script>
   </body>
 </html>
