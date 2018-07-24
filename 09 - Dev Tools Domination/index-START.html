@@ -18,29 +18,54 @@
     }
 
     // Regular
+    console.log('hello');
 
     // Interpolated
+    console.log('Hello I am %s', 'Lluis');
 
     // Styled
+    console.log('%c Hello I am Lluis', 'font-size: 20px; color: red;');
 
     // warning!
+    console.warn('Warning message');
 
     // Error :|
+    console.error('Error message');
 
     // Info
+    console.info('Info message');
 
     // Testing
-
-    // clearing
+    console.assert(1 !== 1, 'That is wrong');
 
     // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.log(p);
+    console.dir(p);
+
+    // clearing
+    console.clear();
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`This is ${dog.age} years old`);
+      console.log(`This is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
+    console.count('Wes');
 
     // timing
-
+    console.time('fetching data');
+    fetch('https://api.github.com/users/LluisArevalo')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      });
   </script>
 </body>
 </html>
